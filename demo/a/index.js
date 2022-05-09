@@ -7,10 +7,3 @@ function increment(){
 
 
 
-
-let ag=0
-function age(){
-
-    ag=ag+1
-    document.getElementById("age-al").innerText=ag
-}

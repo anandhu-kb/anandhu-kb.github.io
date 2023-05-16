@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notepad App</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="container">
+    <div id="saveInputContainer" class="save-input-container">
+      <input type="text" id="fileNameInput" placeholder="Enter file name">
+      <button id="saveFileBtn">Save</button>
+      <button id="cancelSaveBtn">Cancel</button>
+    </div>
+    <div class="toggle-switch">
+      <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+      <label for="darkModeToggle"></label>
+    </div>
+    <div class="toolbar">
+      <button id="openBtn">Open</button>
+      <button id="saveBtn">Save</button>
+      <div class="dropdown">
+        <button class="dropbtn">Save As &#9660;</button>
+        <div class="dropdown-content">
+          <a id="txtOption">Text (.txt)</a>
+          <a id="htmlOption">HTML (.html)</a>
+          <a id="jsOption">JavaScript (.js)</a>
+        </div>
+      </div>
+    </div>
+    <textarea id="codeInput" placeholder="Enter your code here"></textarea>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

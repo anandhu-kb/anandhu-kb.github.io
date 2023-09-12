@@ -1,0 +1,68 @@
+Moving within a File (Navigation):
+Commands	Description
+`k` 	Moves the cursor up one line.
+`j`	Moves the cursor down one line.
+`h` 	 Moves the cursor to the left one-character position.
+`l`	Moves the cursor to the right one-character position.
+`0`	Positions cursor at beginning of line.
+`$`	Positions cursor at end of line.
+`W`	Positions cursor to the next word.
+`B` 	Positions cursor to previous work.
+`(`	Positions cursor to beginning of current sentence.
+`)`	Positions cursor to beginning of next sentence.
+`H`	Move to top of screen.
+`nH`	Moves to nth line from the top of the screen.
+`M`	Move to middle of screen.
+`L`	Move to bottom of screen.
+`nL`	Moves to nth line from the bottom of the screen.
+
+
+Control Command (Scrolling) in vi editor in Linux:
+Command	Description
+CTRL+d	moves the screen down by half a page.
+CTRL+f	moves the screen down by a full page.
+CTRL+u	moves the screen up by half a page.
+CTRL+b	moves the screen up by a full page.
+CTRL+e	moves the screen up by one line.
+CTRL+y	moves the screen down by one line.
+CTRL+I	redraw the screen.
+
+
+Common vi Editor Commands for Inserting and Replacing text:
+Command 	Description
+i	Inserts text before current cursor location
+a	Insert text after current cursor location 
+A	Insert text at the end of current line
+o	Creates a new line for text entry below cursor location and switches to insert mode.
+O	Creates a new line for text entry above cursor location and switches to insert mode.
+s	Replaces single character under the cursor with any number of characters and switches 	to insert mode.
+R	Overwrites text from the cursor to the right, without switching to insert mode.
+
+
+Vi Editor Commands in Linux for Deleting Characters and Lines:
+Command	Description
+`X` 	(Uppercase)	Deletes the character before the cursor location.
+`x` 	(Lowercase)	Deletes the character at the cursor location.
+`Dw`	Deletes from the current cursor location to the next word
+`d^`	Deletes from current cursor position to the beginning of the line.
+`d$`	Deletes from current cursor position to the end of the line.
+`Dd`	Deletes the line the cursor is on.
+
+
+Copy and Paste Commands in Vi editor in Linux:
+Commands	Description
+Yy		Copies the current line.
+9yy		Yank current line and 9 lines below.
+p		Puts the copied text after the cursor.
+P		Put the yanked text before the cursor.
+
+
+Save and Exit Commands in Vi Editor in Linux:
+Commands 	Description
+q		Quit
+q!		Quit without saving changes i.e. discard changes.
+r [file_name]	Read data from file called [file_name]
+wq		Write and quit (save and exit).
+w		Write to file called [file_name] (save as).
+w!		Overwrite to file called [file_name] (save as forcefully).
+!cmd		Runs shell commands and returns to Command mode.

@@ -1,20 +1,46 @@
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>My Projects</title>
-        <style>
-            #a {
-                text-align: center;
-                font-size: 50px;
-}
 
-        </style>
-    </head>
-    <body bgcolor="cyan">
+<head>
+    <title>My Projects</title>
+    <style>
+        #a {
+            text-align: center;
+            font-size: 50px;
+        }
 
-        <a href="./inc/" id="a">counter</a><br>
-        <a href="./np/" id="a">notepad</a><br>
-        <a href="./stu.zip" id="a">student mark entry php</a><br>
-        <a href="./php-temp.zip" id="a">php template</a><br>
-        
-    </body>
+        #file-list {
+            list-style-type:circle;
+        }
+
+        #file-list a {
+            text-decoration: none;
+            color: black;
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body bgcolor="cyan">
+    <h1 id="a">My Projects</h1>
+    <ul id="file-list"></ul>
+
+    <script>
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const fileListElement = document.getElementById('file-list');
+                data.forEach(file => {
+                    const anchorElement = document.createElement('a');
+                    anchorElement.href = file.href;
+                    anchorElement.textContent = file.text;
+                    const listItemElement = document.createElement('li');
+                    listItemElement.appendChild(anchorElement);
+                    fileListElement.appendChild(listItemElement);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+
 </html>

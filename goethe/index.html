@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h2>Upload an Image</h2>
+    <input type="file" id="id_proof" accept="image/*" onchange="showImage(event)">
+    <br><br>
+    <img id="imagePreview" style="max-width: 100%; display: none;" alt="Uploaded Image Preview">
+
+    <script>
+        function showImage(event) {
+            const imageInput = event.target;
+            const imagePreview = document.getElementById("imagePreview");
+
+            if (imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = "block";
+                };
+
+                reader.readAsDataURL(imageInput.files[0]);
+            }
+        }
+    </script>
+</body>
+</html>

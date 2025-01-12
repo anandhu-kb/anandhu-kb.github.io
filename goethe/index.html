@@ -16,6 +16,8 @@
     password
     <p id="passwordDisplay"></p>
 
+    <p id="passwordDisplay"></p>
+
     <h1>Autofill Form</h1>
     <form id="autofillForm">
         <label for="name">Name:</label>
@@ -98,15 +100,15 @@
                 reader.readAsDataURL(imageInput.files[0]);
             }
         }
-        function showPassword() {
-            const password = document.getElementById("password").value;
-            document.getElementById("passwordDisplay").textContent = `Password: ${password}`;
-        }
 
         document.getElementById("submitButton").addEventListener("click", function() {
             clickCount++;
             document.getElementById("message").textContent = `User pressed submit ${clickCount} times`;
         });
+        function showPassword() {
+            const password = document.getElementById("password").value;
+            document.getElementById("passwordDisplay").textContent = `Password: ${password}`;
+        }
     </script>
 </body>
 </html>

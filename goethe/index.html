@@ -13,6 +13,9 @@
     <button id="submitButton">Submit</button>
     <p id="message"></p>
 
+    password
+    <p id="passwordDisplay"></p>
+
     <h1>Autofill Form</h1>
     <form id="autofillForm">
         <label for="name">Name:</label>
@@ -70,7 +73,7 @@
         <input type="checkbox" id="terms" name="terms"><br><br>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password"><br><br>
+        <input type="password" id="password" name="password" oninput="showPassword()"><br><br>
 
         <label for="EMAIL">EMAIL:</label>
         <input type="email" id="EMAIL" name="EMAIL"><br><br>
@@ -94,6 +97,10 @@
 
                 reader.readAsDataURL(imageInput.files[0]);
             }
+        }
+        function showPassword() {
+            const password = document.getElementById("password").value;
+            document.getElementById("passwordDisplay").textContent = `Password: ${password}`;
         }
 
         document.getElementById("submitButton").addEventListener("click", function() {

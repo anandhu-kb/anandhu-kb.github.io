@@ -10,7 +10,7 @@
     <br><br>
     <img id="imagePreview" style="max-width: 100%; display: none;" alt="Uploaded Image Preview">
     <br><br>
-    <button id="submitButton">Submit</button>
+    <button id="btn_submit">Submit</button>
     <p id="message"></p>
 
     <p id="passwordDisplay"></p>
@@ -98,7 +98,7 @@
             }
         }
 
-        document.getElementById("submitButton").addEventListener("click", function() {
+        document.getElementById("btn_submit").addEventListener("click", function() {
             clickCount++;
             document.getElementById("message").textContent = `User pressed submit ${clickCount} times`;
         });

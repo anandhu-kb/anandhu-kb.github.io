@@ -10,5 +10,9 @@
     {
       "href": "./php/php-temp.zip",
       "text": "php template"
+    },
+    {
+      "href": "./temp/index.html",
+      "text": "Templates"
     }
   ]

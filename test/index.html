@@ -17,48 +17,34 @@
     <style>
         /* --- THEME VARIABLES --- */
         :root {
-            --bg-deep: #121212;       /* Matte Black */
-            --bg-panel: #1c1c1c;      /* Charcoal (Card Background) */
-            --gold: #087fe9;          /* SKYNOIR Blue */
-            --text-white: #F0F0F0;    
+            --bg-deep: #121212;
+            --bg-panel: #1c1c1c;
+            --gold: #087fe9;
+            --text-white: #F0F0F0;
             --text-muted: #999999;
         }
 
-        body {
+        /* 1. GLOBAL RESET (Crucial for Mobile) */
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden; /* Stops side-scrolling/white gaps */
             background-color: var(--bg-deep);
             color: var(--text-white);
             font-family: 'Manrope', sans-serif;
-            overflow-x: hidden;
         }
 
-        /* FILM GRAIN TEXTURE */
+        /* FILM GRAIN */
         body::after {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
             pointer-events: none; z-index: 9999;
         }
 
         /* TYPOGRAPHY */
-        h1, h2, h3, h4, .navbar-brand {
-            font-family: 'Cinzel', serif;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        h2 {
-            color: var(--gold);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: ''; display: block; width: 40px; height: 2px;
-            background: var(--gold); margin-top: 15px;
-        }
-
+        h1, h2, h3, h4, .navbar-brand { font-family: 'Cinzel', serif; text-transform: uppercase; letter-spacing: 3px; }
+        h2 { color: var(--gold); font-size: 2rem; margin-bottom: 1.5rem; position: relative; display: inline-block; }
+        h2::after { content: ''; display: block; width: 40px; height: 2px; background: var(--gold); margin-top: 15px; }
         p { color: var(--text-muted); line-height: 1.8; font-weight: 300; }
 
         /* NAVBAR */
@@ -66,119 +52,107 @@
         .navbar.scrolled { background: #000; padding: 15px 0; border-bottom: 1px solid #333; }
         .nav-link { color: var(--text-white) !important; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-left: 20px; }
         .nav-link:hover { color: var(--gold) !important; }
-        
-        .navbar-brand {
-            font-weight: 600;
-            font-size: 1.5rem;
-            letter-spacing: 5px; 
-        }
+        .navbar-brand { font-weight: 600; font-size: 1.5rem; letter-spacing: 5px; }
 
         /* BUTTONS */
         .btn-gold {
-            background-color: var(--gold); color: #000;
-            padding: 12px 30px; font-family: 'Cinzel', serif; font-weight: 600;
-            border: none; border-radius: 0; transition: 0.3s;
-            text-decoration: none; display: inline-block;
+            background-color: var(--gold); color: #000; padding: 12px 30px; 
+            font-family: 'Cinzel', serif; font-weight: 600; border: none; border-radius: 0; 
+            transition: 0.3s; text-decoration: none; display: inline-block;
         }
         .btn-gold:hover { background-color: #fff; transform: translateY(-2px); color: #000; }
 
-        /* HERO SECTION */
+        /* HERO SECTION (MOBILE FIXED) */
         .hero-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100%; 
+            height: 100vh;      /* Fallback */
+            height: 100dvh;     /* Dynamic Viewport Height (Fixes Android Address Bar) */
             z-index: -1; background: #000;
         }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://images.unsplash.com/photo-1487621167305-5d248087c724?q=80&w=1332&auto=format&fit=crop') center/cover no-repeat;
-            opacity: 0.6; 
-            filter: brightness(0.8);
+            opacity: 0.6; filter: brightness(0.8);
         }
         .hero-content {
-            height: 100%; display: flex; flex-direction: column;
+            height: 100%; 
+            width: 100%; /* Ensure full width */
+            padding: 0 20px; /* Prevent text touching edges */
+            display: flex; flex-direction: column;
             justify-content: center; align-items: center; text-align: center;
             position: relative; z-index: 2;
         }
         .hero-title {
-            font-size: 4rem; color: #fff; margin-bottom: 20px;
+            font-size: 3.5rem; /* Default Desktop Size */
+            color: #fff; margin-bottom: 20px;
             border-bottom: 1px solid var(--gold); padding-bottom: 20px;
         }
 
         /* MAIN WRAPPER */
         .main-content-wrapper {
-            position: relative; margin-top: 100vh;
+            position: relative; margin-top: 100vh; margin-top: 100dvh;
             background-color: var(--bg-deep);
             box-shadow: 0 -10px 50px rgba(0,0,0,1);
             z-index: 10; padding-top: 100px;
+            overflow-x: hidden; /* Double protection against scroll */
         }
 
-        /* IMAGES */
+        /* EDITORIAL IMAGES */
         .editorial-img-wrapper { position: relative; padding: 10px; border: 1px solid #333; }
-        .editorial-img {
-            width: 100%; height: 400px; object-fit: cover;
-            filter: grayscale(100%) contrast(1.1); transition: filter 0.7s ease;
-        }
+        .editorial-img { width: 100%; height: 400px; object-fit: cover; filter: grayscale(100%) contrast(1.1); transition: filter 0.7s ease; }
         .editorial-img-wrapper:hover .editorial-img { filter: grayscale(0%) contrast(1); }
-        .accent-box {
-            position: absolute; top: -10px; left: -10px; width: 80px; height: 80px;
-            border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); z-index: 1;
-        }
+        .accent-box { position: absolute; top: -10px; left: -10px; width: 80px; height: 80px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); z-index: 1; }
 
-        /* ROOM CARDS */
-        .room-card {
-            background: var(--bg-panel);
-            padding: 20px; border: 1px solid #333; transition: 0.3s; height: 100%;
-        }
+        /* CARDS */
+        .room-card { background: var(--bg-panel); padding: 20px; border: 1px solid #333; transition: 0.3s; height: 100%; }
         .room-card:hover { border-color: var(--gold); transform: translateY(-5px); }
         .room-img { width: 100%; height: 250px; object-fit: cover; filter: grayscale(50%); margin-bottom: 20px; }
         .room-price { font-family: 'Cinzel'; color: var(--gold); font-size: 1.2rem; margin-top: 10px; }
         .amenity-list li { color: #888; font-size: 0.9rem; margin-bottom: 5px; list-style: none; }
         .amenity-list li::before { content: "•"; color: var(--gold); margin-right: 10px; }
 
-        /* SERVICES ICONS */
-        .service-box {
-            text-align: center; padding: 30px; border: 1px solid #222; transition: 0.3s;
-        }
+        /* SERVICES */
+        .service-box { text-align: center; padding: 30px; border: 1px solid #222; transition: 0.3s; }
         .service-box:hover { background: #1a1a1a; border-color: var(--gold); }
         .service-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 15px; }
 
         /* MAP */
-        .map-container iframe {
-            width: 100%; height: 100%;
-            filter: grayscale(100%) invert(92%) contrast(0.83); 
-        }
+        .map-container iframe { width: 100%; height: 100%; filter: grayscale(100%) invert(92%) contrast(0.83); }
 
         /* FOOTER */
         footer { background: #080808; padding: 80px 0; border-top: 1px solid #222; text-align: center; }
 
         /* =========================================
-           MOBILE OPTIMIZATIONS (The Fixes)
+           MOBILE OPTIMIZATIONS (FIXED)
            ========================================= */
         @media (max-width: 991px) {
-            /* 1. Navbar Dropdown Background */
+            /* Fix Navbar Background on Mobile */
             .navbar-collapse {
-                background-color: #000;
+                background-color: rgba(0,0,0,0.95);
+                backdrop-filter: blur(10px);
                 padding: 20px;
-                border: 1px solid #333;
                 margin-top: 15px;
+                border: 1px solid #333;
             }
-            .nav-link { margin-left: 0; margin-bottom: 15px; }
+            .nav-link { margin-left: 0; margin-bottom: 15px; text-align: center; }
             .btn-gold { width: 100%; text-align: center; }
 
-            /* 2. Typography Resizing */
-            .hero-title { font-size: 2.5rem; }
-            h2 { font-size: 1.7rem; }
+            /* Fix Hero Centering & Sizing */
+            .hero-title { font-size: 2rem; border-bottom-width: 1px; } 
             
-            /* 3. Spacing Adjustments */
+            /* Fix Spacing */
             .main-content-wrapper { padding-top: 60px; }
             section { padding-bottom: 60px !important; }
             
-            /* 4. Image Height Fixes */
-            .editorial-img { height: 280px; } /* Shorter images for phone */
+            /* Fix Images */
+            .editorial-img { height: 250px; }
             .map-container { height: 350px !important; }
             
-            /* 5. Reverse layout fix for Dining Section on Mobile */
-            /* This ensures image shows nicely stacked */
+            /* Stack elements correctly */
             .flex-row-reverse { flex-direction: column-reverse !important; }
+            
+            /* Ensure text doesn't touch screen edges */
+            .container { padding-left: 20px; padding-right: 20px; }
         }
     </style>
 </head>

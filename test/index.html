@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyNoir | The Nature Sanctuary</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- THEME VARIABLES --- */
+        :root {
+            --bg-deep: #121212;       /* Matte Black */
+            --bg-panel: #1c1c1c;      /* Charcoal (Card Background) */
+            --gold: #087fe9;          /* Muted Gold */
+            --text-white: #F0F0F0;    
+            --text-muted: #999999;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-white);
+            font-family: 'Manrope', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* FILM GRAIN TEXTURE (The "Professional" Look) */
+        body::after {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9999;
+        }
+
+        /* TYPOGRAPHY */
+        h1, h2, h3, h4, .navbar-brand {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        h2 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Gold underline for headings */
+        h2::after {
+            content: ''; display: block; width: 40px; height: 2px;
+            background: var(--gold); margin-top: 15px;
+        }
+
+        p { color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+
+        /* NAVBAR */
+        .navbar { padding: 25px 0; transition: all 0.4s ease; background: transparent; }
+        .navbar.scrolled { background: #000; padding: 15px 0; border-bottom: 1px solid #333; }
+        .nav-link { color: var(--text-white) !important; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-left: 20px; }
+        .nav-link:hover { color: var(--gold) !important; }
+        
+        /* BRANDING */
+        .navbar-brand {
+            font-weight: 600;
+            font-size: 1.5rem;
+            letter-spacing: 5px; /* Wider spacing for SKYNOIR looks cleaner */
+        }
+
+        /* GOLD BUTTON */
+        .btn-gold {
+            background-color: var(--gold); color: #000;
+            padding: 12px 30px; font-family: 'Cinzel', serif; font-weight: 600;
+            border: none; border-radius: 0; transition: 0.3s;
+            text-decoration: none; display: inline-block;
+        }
+        .btn-gold:hover { background-color: #fff; transform: translateY(-2px); color: #000; }
+
+        /* HERO (FIXED PARALLAX BACKGROUND) */
+        .hero-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            z-index: -1; background: #000;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* THE FOGGY GREEN FOREST IMAGE */
+            background: url('https://images.unsplash.com/photo-1487621167305-5d248087c724?q=80&w=1332&auto=format&fit=crop') center/cover no-repeat;
+            opacity: 0.6; /* Slightly dark so text pops */
+            filter: brightness(0.8);
+        }
+        .hero-content {
+            height: 100%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            position: relative; z-index: 2;
+        }
+        .hero-title {
+            font-size: 4rem; color: #fff; margin-bottom: 20px;
+            border-bottom: 1px solid var(--gold); padding-bottom: 20px;
+        }
+
+        /* MAIN WRAPPER (Slides over the Hero) */
+        .main-content-wrapper {
+            position: relative; margin-top: 100vh;
+            background-color: var(--bg-deep);
+            box-shadow: 0 -10px 50px rgba(0,0,0,1);
+            z-index: 10; padding-top: 100px;
+        }
+
+        /* IMAGES (EDITORIAL STYLE) */
+        .editorial-img-wrapper { position: relative; padding: 10px; border: 1px solid #333; }
+        .editorial-img {
+            width: 100%; height: 400px; object-fit: cover;
+            filter: grayscale(100%) contrast(1.1); transition: filter 0.7s ease;
+        }
+        .editorial-img-wrapper:hover .editorial-img { filter: grayscale(0%) contrast(1); }
+        .accent-box {
+            position: absolute; top: -10px; left: -10px; width: 80px; height: 80px;
+            border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); z-index: 1;
+        }
+
+        /* ROOM CARDS */
+        .room-card {
+            background: var(--bg-panel);
+            padding: 20px;
+            border: 1px solid #333;
+            transition: 0.3s;
+            height: 100%;
+        }
+        .room-card:hover { border-color: var(--gold); transform: translateY(-5px); }
+        .room-img { width: 100%; height: 250px; object-fit: cover; filter: grayscale(50%); margin-bottom: 20px; }
+        .room-price { font-family: 'Cinzel'; color: var(--gold); font-size: 1.2rem; margin-top: 10px; }
+        .amenity-list li { color: #888; font-size: 0.9rem; margin-bottom: 5px; list-style: none; }
+        .amenity-list li::before { content: "•"; color: var(--gold); margin-right: 10px; }
+
+        /* SERVICES ICONS */
+        .service-box {
+            text-align: center; padding: 30px; border: 1px solid #222; transition: 0.3s;
+        }
+        .service-box:hover { background: #1a1a1a; border-color: var(--gold); }
+        .service-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 15px; }
+
+        /* GOOGLE MAPS DARK FILTER */
+        .map-container iframe {
+            width: 100%; height: 100%;
+            filter: grayscale(100%) invert(92%) contrast(0.83); /* Dark Mode Map */
+        }
+
+        /* FOOTER */
+        footer { background: #080808; padding: 80px 0; border-top: 1px solid #222; text-align: center; }
+
+        /* MOBILE ADJUSTMENTS */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; border: none; }
+            .section-padding { padding-top: 50px; padding-bottom: 50px; }
+            .editorial-img { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="color:var(--gold);">SKYNOIR</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span style="color: white; font-size: 1.5rem;">☰</span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#atmosphere">Vibe</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#rooms">Stay</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#camping" style="color: var(--gold) !important;">Camping</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#dining">Dining</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
+                    <li class="nav-item ms-4">
+                        <a href="https://wa.me/919999999999" class="btn-gold">Inquire</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-container">
+        <div class="hero-bg"></div>
+        <div class="hero-content container" id="heroText">
+            <p style="text-transform: uppercase; letter-spacing: 5px; color: var(--gold); font-size: 0.9rem;" data-aos="fade-in">Poondi, Tamil Nadu</p>
+            <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">The Silent Sanctuary</h1>
+            <p style="max-width: 500px; color: #ccc;" data-aos="fade-up" data-aos-delay="400">
+                Where the forest meets the sky.
+            </p>
+        </div>
+    </div>
+
+    <div class="main-content-wrapper">
+        
+        <section id="atmosphere" class="container py-5" style="padding-bottom: 100px;">
+            <div class="row align-items-center">
+                <div class="col-lg-6 position-relative" data-aos="fade-right">
+                    <div class="editorial-img-wrapper">
+                        <div class="accent-box"></div> 
+                        <img src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?q=80&w=1200&auto=format&fit=crop" class="editorial-img" alt="Poondi Nature">
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-up">
+                    <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">01 / The Vibe</p>
+                    <h2>Sacred Silence</h2>
+                    <p>SkyNoir is not a tourist trap. It is a place of pause. Located between the historic Basilica and the vast reservoir, the air here carries a stillness you cannot find in the city.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="rooms" class="container py-5">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">02 / Accommodations</p>
+                <h2>Your Private Space</h2>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="room-card">
+                        <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?q=80&w=800&auto=format&fit=crop" class="room-img" alt="Deluxe Room">
+                        <h4>Deluxe</h4>
+                        <p class="small">Perfect for couples. Garden view.</p>
+                        <ul class="amenity-list p-0">
+                            <li>King Size Bed</li>
+                            <li>AC & Wifi</li>
+                            <li>Hot Water</li>
+                        </ul>
+                        <div class="room-price">₹2,500 <span style="font-size:0.8rem; color:#666;">/ Night</span></div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="room-card">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=800&auto=format&fit=crop" class="room-img" alt="Family Suite">
+                        <h4>Family</h4>
+                        <p class="small">Two connected rooms.</p>
+                        <ul class="amenity-list p-0">
+                            <li>2 Queen Beds</li>
+                            <li>Private Balcony</li>
+                            <li>Living Area</li>
+                        </ul>
+                        <div class="room-price">₹4,500 <span style="font-size:0.8rem; color:#666;">/ Night</span></div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="room-card">
+                        <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?q=80&w=800&auto=format&fit=crop" class="room-img" alt="Dormitory">
+                        <h4>Dorm</h4>
+                        <p class="small">Clean beds for large groups.</p>
+                        <ul class="amenity-list p-0">
+                            <li>Individual Lockers</li>
+                            <li>Common Lounge</li>
+                            <li>Shared Bath</li>
+                        </ul>
+                        <div class="room-price">₹800 <span style="font-size:0.8rem; color:#666;">/ Bed</span></div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="room-card" style="border-color: var(--gold);">
+                        <div style="position: absolute; top: 10px; right: 10px; background: var(--gold); color: black; padding: 2px 10px; font-size: 0.7rem; font-weight: bold; z-index: 2;">POPULAR</div>
+                        <img src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?q=80&w=800&auto=format&fit=crop" class="room-img" alt="Camping">
+                        <h4>Camping</h4>
+                        <p class="small">Sleep under the stars.</p>
+                        <ul class="amenity-list p-0">
+                            <li>2-Person Tents</li>
+                            <li>Campfire</li>
+                            <li>Secure Ground</li>
+                        </ul>
+                        <div class="room-price">₹500 <span style="font-size:0.8rem; color:#666;">/ Person</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a href="gallery.html" class="btn btn-outline-light" style="border-radius:0; border-color: #333; color: #999;">View Full Photo Gallery</a>
+            </div>
+        </section>
+
+        <section id="camping" class="container py-5" style="padding-bottom: 100px;">
+            <div class="row align-items-center">
+                <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1200">
+                    <div class="editorial-img-wrapper">
+                        <div class="accent-box"></div> 
+                        <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=1200&auto=format&fit=crop" class="editorial-img" alt="Camping at Poondi">
+                    </div>
+                </div>
+                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-up" data-aos-duration="1200">
+                    <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">03 / Adventure</p>
+                    <h2>Sleep Under the Stars</h2>
+                    <p>For those who want to get closer to nature, SkyNoir offers a secure, enclosed camping ground overlooking the reservoir. Experience the raw beauty of Poondi without sacrificing safety.</p>
+                    
+                    <ul style="list-style: none; padding: 0; margin-top: 20px; color: #fff;">
+                        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+                            <i class="bi bi-fire" style="color: var(--gold); margin-right: 15px;"></i>
+                            <div>
+                                <strong style="color: #fff; display: block; font-size: 0.9rem;">Private Bonfires</strong>
+                                <span style="font-size: 0.85rem; color: #888;">We provide the wood and safety pit.</span>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+                            <i class="bi bi-shield-check" style="color: var(--gold); margin-right: 15px;"></i>
+                            <div>
+                                <strong style="color: #fff; display: block; font-size: 0.9rem;">Secure Grounds</strong>
+                                <span style="font-size: 0.85rem; color: #888;">Fenced area with 24/7 security patrol.</span>
+                            </div>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: start;">
+                            <i class="bi bi-stars" style="color: var(--gold); margin-right: 15px;"></i>
+                            <div>
+                                <strong style="color: #fff; display: block; font-size: 0.9rem;">Stargazing</strong>
+                                <span style="font-size: 0.85rem; color: #888;">Zero light pollution. Perfect visibility.</span>
+                            </div>
+                        </li>
+                    </ul>
+                    <a href="https://wa.me/919999999999?text=I%20am%20interested%20in%20Tent%20Booking" class="btn-gold mt-3">Book a Tent</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="container py-5 mb-5">
+            <div class="row g-0">
+                <div class="col-6 col-md-3 service-box" data-aos="fade-up">
+                    <i class="bi bi-wifi service-icon"></i>
+                    <h5>Fast Wifi</h5>
+                </div>
+                <div class="col-6 col-md-3 service-box" data-aos="fade-up" data-aos-delay="100">
+                    <i class="bi bi-shield-check service-icon"></i>
+                    <h5>24/7 Security</h5>
+                </div>
+                <div class="col-6 col-md-3 service-box" data-aos="fade-up" data-aos-delay="200">
+                    <i class="bi bi-car-front-fill service-icon"></i>
+                    <h5>Secure Parking</h5>
+                </div>
+                <div class="col-6 col-md-3 service-box" data-aos="fade-up" data-aos-delay="300">
+                    <i class="bi bi-clock-history service-icon"></i>
+                    <h5>24h Check-in</h5>
+                </div>
+            </div>
+        </section>
+
+        <section id="dining" class="container py-5 mb-5">
+            <div class="row align-items-center flex-row-reverse">
+                <div class="col-lg-6 position-relative" data-aos="fade-left">
+                    <div class="editorial-img-wrapper">
+                        <div class="accent-box" style="top:auto; left:auto; bottom:-10px; right:-10px; border:none; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold);"></div>
+                        <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=1200&auto=format&fit=crop" class="editorial-img" style="height: 500px;" alt="South Indian Food">
+                    </div>
+                </div>
+                <div class="col-lg-5 me-auto" data-aos="fade-right">
+                    <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">04 / The Canteen</p>
+                    <h2>Earth & Fire</h2>
+                    <p>We don't serve "Hotel Food". We serve home food. Our canteen uses traditional clay pots and wood fire for that authentic village taste.</p>
+                    <p class="mb-4">From early morning Idli-Sambar after Mass to spicy Fish Curry caught fresh from the reservoir, everything is made fresh to order.</p>
+                    <a href="#" style="color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold);">View Menu</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="location" class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-md-5 bg-dark d-flex align-items-center justify-content-center p-5">
+                    <div style="max-width: 400px;">
+                        <h2 class="mb-4">Finding Us</h2>
+                        <p class="text-white"><strong>Address:</strong><br>
+                        Survey No. 12/4, Near Poondi Madha Basilica,<br>
+                        Tiruvallur District, Tamil Nadu.</p>
+                        
+                        <hr style="border-color: #333; margin: 30px 0;">
+
+                        <div class="d-flex align-items-start mb-3">
+                            <i class="bi bi-geo-alt-fill me-3 fs-4" style="color: var(--gold);"></i>
+                            <p class="small mb-0">5 Mins walk from Basilica<br>10 Mins drive to Reservoir</p>
+                        </div>
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-train-front-fill me-3 fs-4" style="color: var(--gold);"></i>
+                            <p class="small mb-0">15km from Tiruvallur Railway Stn<br>60km from Chennai Airport</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 map-container" style="height: 500px;">
+                    <iframe src="https://maps.google.com/maps?q=Poondi%20Madha%20Basilica&t=&z=13&ie=UTF8&iwloc=&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <h3 style="color: var(--gold); margin-bottom: 20px;">SKYNOIR</h3>
+            <p>Sanctuary for the Soul.</p>
+            <div class="mt-4">
+                <a href="#" class="text-white mx-2"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white mx-2"><i class="bi bi-facebook"></i></a>
+                <a href="https://wa.me/919999999999" class="text-white mx-2"><i class="bi bi-whatsapp"></i></a>
+            </div>
+            <p style="font-size: 0.8rem; opacity: 0.5; margin-top: 30px;">© 2025 SkyNoir Resort.</p>
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Scroll Logic for Navbar & Hero Fade
+        const nav = document.getElementById('mainNav');
+        const heroText = document.getElementById('heroText');
+
+        window.addEventListener('scroll', () => {
+            let scrollY = window.scrollY;
+            
+            // Solid Navbar on Scroll
+            if (scrollY > 50) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+
+            // Fade out Hero Text
+            let opacity = 1 - (scrollY / 400);
+            if (opacity >= 0) {
+                heroText.style.opacity = opacity;
+                heroText.style.transform = `translateY(${scrollY * 0.4}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

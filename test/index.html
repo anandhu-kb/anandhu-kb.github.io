@@ -19,7 +19,7 @@
         :root {
             --bg-deep: #121212;       /* Matte Black */
             --bg-panel: #1c1c1c;      /* Charcoal (Card Background) */
-            --gold: #087fe9;          /* Muted Gold */
+            --gold: #087fe9;          /* SKYNOIR Blue */
             --text-white: #F0F0F0;    
             --text-muted: #999999;
         }
@@ -31,7 +31,7 @@
             overflow-x: hidden;
         }
 
-        /* FILM GRAIN TEXTURE (The "Professional" Look) */
+        /* FILM GRAIN TEXTURE */
         body::after {
             content: "";
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -54,7 +54,6 @@
             display: inline-block;
         }
 
-        /* Gold underline for headings */
         h2::after {
             content: ''; display: block; width: 40px; height: 2px;
             background: var(--gold); margin-top: 15px;
@@ -68,14 +67,13 @@
         .nav-link { color: var(--text-white) !important; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-left: 20px; }
         .nav-link:hover { color: var(--gold) !important; }
         
-        /* BRANDING */
         .navbar-brand {
             font-weight: 600;
             font-size: 1.5rem;
-            letter-spacing: 5px; /* Wider spacing for SKYNOIR looks cleaner */
+            letter-spacing: 5px; 
         }
 
-        /* GOLD BUTTON */
+        /* BUTTONS */
         .btn-gold {
             background-color: var(--gold); color: #000;
             padding: 12px 30px; font-family: 'Cinzel', serif; font-weight: 600;
@@ -84,16 +82,15 @@
         }
         .btn-gold:hover { background-color: #fff; transform: translateY(-2px); color: #000; }
 
-        /* HERO (FIXED PARALLAX BACKGROUND) */
+        /* HERO SECTION */
         .hero-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             z-index: -1; background: #000;
         }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* THE FOGGY GREEN FOREST IMAGE */
             background: url('https://images.unsplash.com/photo-1487621167305-5d248087c724?q=80&w=1332&auto=format&fit=crop') center/cover no-repeat;
-            opacity: 0.6; /* Slightly dark so text pops */
+            opacity: 0.6; 
             filter: brightness(0.8);
         }
         .hero-content {
@@ -106,7 +103,7 @@
             border-bottom: 1px solid var(--gold); padding-bottom: 20px;
         }
 
-        /* MAIN WRAPPER (Slides over the Hero) */
+        /* MAIN WRAPPER */
         .main-content-wrapper {
             position: relative; margin-top: 100vh;
             background-color: var(--bg-deep);
@@ -114,7 +111,7 @@
             z-index: 10; padding-top: 100px;
         }
 
-        /* IMAGES (EDITORIAL STYLE) */
+        /* IMAGES */
         .editorial-img-wrapper { position: relative; padding: 10px; border: 1px solid #333; }
         .editorial-img {
             width: 100%; height: 400px; object-fit: cover;
@@ -129,10 +126,7 @@
         /* ROOM CARDS */
         .room-card {
             background: var(--bg-panel);
-            padding: 20px;
-            border: 1px solid #333;
-            transition: 0.3s;
-            height: 100%;
+            padding: 20px; border: 1px solid #333; transition: 0.3s; height: 100%;
         }
         .room-card:hover { border-color: var(--gold); transform: translateY(-5px); }
         .room-img { width: 100%; height: 250px; object-fit: cover; filter: grayscale(50%); margin-bottom: 20px; }
@@ -147,20 +141,44 @@
         .service-box:hover { background: #1a1a1a; border-color: var(--gold); }
         .service-icon { font-size: 2.5rem; color: var(--gold); margin-bottom: 15px; }
 
-        /* GOOGLE MAPS DARK FILTER */
+        /* MAP */
         .map-container iframe {
             width: 100%; height: 100%;
-            filter: grayscale(100%) invert(92%) contrast(0.83); /* Dark Mode Map */
+            filter: grayscale(100%) invert(92%) contrast(0.83); 
         }
 
         /* FOOTER */
         footer { background: #080808; padding: 80px 0; border-top: 1px solid #222; text-align: center; }
 
-        /* MOBILE ADJUSTMENTS */
-        @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; border: none; }
-            .section-padding { padding-top: 50px; padding-bottom: 50px; }
-            .editorial-img { height: 300px; }
+        /* =========================================
+           MOBILE OPTIMIZATIONS (The Fixes)
+           ========================================= */
+        @media (max-width: 991px) {
+            /* 1. Navbar Dropdown Background */
+            .navbar-collapse {
+                background-color: #000;
+                padding: 20px;
+                border: 1px solid #333;
+                margin-top: 15px;
+            }
+            .nav-link { margin-left: 0; margin-bottom: 15px; }
+            .btn-gold { width: 100%; text-align: center; }
+
+            /* 2. Typography Resizing */
+            .hero-title { font-size: 2.5rem; }
+            h2 { font-size: 1.7rem; }
+            
+            /* 3. Spacing Adjustments */
+            .main-content-wrapper { padding-top: 60px; }
+            section { padding-bottom: 60px !important; }
+            
+            /* 4. Image Height Fixes */
+            .editorial-img { height: 280px; } /* Shorter images for phone */
+            .map-container { height: 350px !important; }
+            
+            /* 5. Reverse layout fix for Dining Section on Mobile */
+            /* This ensures image shows nicely stacked */
+            .flex-row-reverse { flex-direction: column-reverse !important; }
         }
     </style>
 </head>
@@ -169,8 +187,8 @@
     <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand" href="#" style="color:var(--gold);">SKYNOIR</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span style="color: white; font-size: 1.5rem;">☰</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border: 1px solid var(--gold);">
+                <span style="color: var(--gold); font-size: 1.5rem;"><i class="bi bi-list"></i></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
@@ -179,7 +197,7 @@
                     <li class="nav-item"><a class="nav-link" href="#camping" style="color: var(--gold) !important;">Camping</a></li>
                     <li class="nav-item"><a class="nav-link" href="#dining">Dining</a></li>
                     <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
-                    <li class="nav-item ms-4">
+                    <li class="nav-item ms-lg-4">
                         <a href="https://wa.me/919999999999" class="btn-gold">Inquire</a>
                     </li>
                 </ul>
@@ -202,13 +220,13 @@
         
         <section id="atmosphere" class="container py-5" style="padding-bottom: 100px;">
             <div class="row align-items-center">
-                <div class="col-lg-6 position-relative" data-aos="fade-right">
+                <div class="col-lg-6 position-relative mb-4 mb-lg-0" data-aos="fade-right">
                     <div class="editorial-img-wrapper">
                         <div class="accent-box"></div> 
                         <img src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?q=80&w=1200&auto=format&fit=crop" class="editorial-img" alt="Poondi Nature">
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-up">
+                <div class="col-lg-5 offset-lg-1" data-aos="fade-up">
                     <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">01 / The Vibe</p>
                     <h2>Sacred Silence</h2>
                     <p>SkyNoir is not a tourist trap. It is a place of pause. Located between the historic Basilica and the vast reservoir, the air here carries a stillness you cannot find in the city.</p>
@@ -288,13 +306,13 @@
 
         <section id="camping" class="container py-5" style="padding-bottom: 100px;">
             <div class="row align-items-center">
-                <div class="col-lg-6 position-relative" data-aos="fade-right" data-aos-duration="1200">
+                <div class="col-lg-6 position-relative mb-4 mb-lg-0" data-aos="fade-right" data-aos-duration="1200">
                     <div class="editorial-img-wrapper">
                         <div class="accent-box"></div> 
                         <img src="https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=1200&auto=format&fit=crop" class="editorial-img" alt="Camping at Poondi">
                     </div>
                 </div>
-                <div class="col-lg-5 offset-lg-1 mt-5 mt-lg-0" data-aos="fade-up" data-aos-duration="1200">
+                <div class="col-lg-5 offset-lg-1" data-aos="fade-up" data-aos-duration="1200">
                     <p style="color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">03 / Adventure</p>
                     <h2>Sleep Under the Stars</h2>
                     <p>For those who want to get closer to nature, SkyNoir offers a secure, enclosed camping ground overlooking the reservoir. Experience the raw beauty of Poondi without sacrificing safety.</p>
@@ -349,8 +367,8 @@
         </section>
 
         <section id="dining" class="container py-5 mb-5">
-            <div class="row align-items-center flex-row-reverse">
-                <div class="col-lg-6 position-relative" data-aos="fade-left">
+            <div class="row align-items-center flex-lg-row-reverse">
+                <div class="col-lg-6 position-relative mb-4 mb-lg-0" data-aos="fade-left">
                     <div class="editorial-img-wrapper">
                         <div class="accent-box" style="top:auto; left:auto; bottom:-10px; right:-10px; border:none; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold);"></div>
                         <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=1200&auto=format&fit=crop" class="editorial-img" style="height: 500px;" alt="South Indian Food">
@@ -368,7 +386,7 @@
 
         <section id="location" class="container-fluid p-0">
             <div class="row g-0">
-                <div class="col-md-5 bg-dark d-flex align-items-center justify-content-center p-5">
+                <div class="col-lg-5 bg-dark d-flex align-items-center justify-content-center p-5">
                     <div style="max-width: 400px;">
                         <h2 class="mb-4">Finding Us</h2>
                         <p class="text-white"><strong>Address:</strong><br>
@@ -387,7 +405,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7 map-container" style="height: 500px;">
+                <div class="col-lg-7 map-container" style="height: 500px;">
                     <iframe src="https://maps.google.com/maps?q=Poondi%20Madha%20Basilica&t=&z=13&ie=UTF8&iwloc=&output=embed" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
@@ -411,18 +429,15 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        // Scroll Logic for Navbar & Hero Fade
         const nav = document.getElementById('mainNav');
         const heroText = document.getElementById('heroText');
 
         window.addEventListener('scroll', () => {
             let scrollY = window.scrollY;
             
-            // Solid Navbar on Scroll
             if (scrollY > 50) nav.classList.add('scrolled');
             else nav.classList.remove('scrolled');
 
-            // Fade out Hero Text
             let opacity = 1 - (scrollY / 400);
             if (opacity >= 0) {
                 heroText.style.opacity = opacity;

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - RS GREEN VALLEY</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .gallery-section {
+            padding: 2rem 0 8rem;
+        }
+
+        .gallery-wrap {
+            position: relative;
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 2px;
+            box-shadow: var(--shadow-sm);
+            margin-top: -6rem; /* Pull up over the header */
+            z-index: 10;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            grid-auto-rows: 300px;
+            grid-auto-flow: dense;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            background: var(--bg-color);
+        }
+
+        .gallery-item:hover {
+            box-shadow: var(--shadow-md);
+            z-index: 2;
+        }
+
+        .gallery-item.wide { grid-column: span 2; }
+        .gallery-item.tall { grid-row: span 2; }
+        .gallery-item.large { grid-column: span 2; grid-row: span 2; }
+        
+        @media (max-width: 900px) {
+            .gallery-wrap { padding: 2rem; margin-top: -3rem; }
+            .gallery-item.wide, 
+            .gallery-item.tall, 
+            .gallery-item.large {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s cubic-bezier(0.25, 1, 0.2, 1);
+            opacity: 0.9;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1) rotate(1deg);
+            opacity: 1;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 100%);
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-quote {
+            color: var(--primary);
+            font-family: 'Inter', serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.05s;
+        }
+
+        .gallery-overlay span {
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .gallery-item:hover .gallery-quote,
+        .gallery-item:hover .gallery-overlay span {
+            transform: translateY(0);
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 12, 10, 0.98);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .lightbox.active .lightbox-img {
+            transform: scale(1);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: var(--text-light);
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 2001;
+            transition: var(--transition);
+            font-weight: 300;
+        }
+        
+        .lightbox-close:hover {
+            color: var(--accent-gold);
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="header-transparent-text">
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">RS Green<span>Valley</span></a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="photos.html" class="active">Gallery</a></li>
+                    <li><a href="about.html">Our Story</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <img src="img/photos.jpg" alt="Header Background" class="page-header-bg">
+        <div class="hero-overlay"></div>
+        <div class="page-header-content reveal">
+            <h1 class="heading-lg">The Exhibition</h1>
+            <span class="subtitle" style="color: var(--text-body);">Visual Memories of RS Green Valley</span>
+        </div>
+    </section>
+
+    <!-- Introductory Quote -->
+    <section class="container" style="padding-top: 4rem;">
+         <div class="quote-wrapper reveal">
+            <h2 class="quote-text">"Every picture is a poem without words."</h2>
+            <span class="subtitle mt-4">Browse our collection</span>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section container">
+        <div class="gallery-wrap reveal">
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Images will be injected here by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img src="" alt="Enlarged view" class="lightbox-img" id="lightbox-img">
+    </div>
+
+    <!-- Dark Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col" style="grid-column: span 1 / auto;">
+                    <a href="index.html" class="logo" style="margin-bottom: 2rem;">RS Green<br><span style="color:var(--accent-gold);">Valley</span></a>
+                    <p class="footer-desc">Redefining serenity in the heart of Shenbaganur. Experience Kodaikanal's premium nature retreat where luxury meets the wild.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Explore</h3>
+                    <a href="index.html">Home</a>
+                    <a href="photos.html">The Gallery</a>
+                    <a href="about.html">Our Story</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <p>📍 Shenbaganur,<br>Opp Indian Petrol Bunk,<br>Kodaikanal</p>
+                    <p style="margin-top: 1rem; color: var(--accent-gold);">📞 +91 8124659689</p>
+                    <p style="color: #666; font-size: 0.9rem;">Management: Sundaralingam</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> RS Green Valley. All Rights Reserved. Designed for Luxury.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const galleryGrid = document.getElementById('gallery-grid');
+            const numImages = 12;
+            
+            // Layout pattern and quotes for gallery
+            const galleryData = [
+                { class: 'large reveal', quote: '"Lost in the woods, found in peace."' },
+                { class: 'reveal-left', quote: '"Nature never goes out of style."' },
+                { class: 'tall reveal-right', quote: '"Breathe in the mountain air."' },
+                { class: 'reveal', quote: '"Serenity painted in green."' },
+                { class: 'wide reveal-left', quote: '"Where the clouds touch the earth."' },
+                { class: 'reveal', quote: '"A symphony of silence."' },
+                { class: 'reveal-zoom', quote: '"Golden hours in the valley."' },
+                { class: 'tall reveal-left', quote: '"Escape the ordinary."' },
+                { class: 'reveal-right', quote: '"Roots deep, spirits high."' },
+                { class: 'wide reveal', quote: '"The art of slow living."' },
+                { class: 'large reveal-zoom', quote: '"Majestic views, mindful moments."' },
+                { class: 'reveal', quote: '"Return to your true nature."' }
+            ];
+
+            for(let i=1; i<=numImages; i++) {
+                const data = galleryData[i-1] || { class: 'reveal', quote: '"Nature is speaking."' };
+                const item = document.createElement('div');
+                item.className = `gallery-item ${data.class}`;
+                item.innerHTML = `
+                    <img src="img/${i}.jpeg" alt="Resort Image ${i}" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <div class="gallery-quote">${data.quote}</div>
+                        <span>Enlarge View</span>
+                    </div>
+                `;
+                
+                // Lightbox setup
+                item.addEventListener('click', () => {
+                    openLightbox(`img/${i}.jpeg`);
+                });
+
+                galleryGrid.appendChild(item);
+            }
+
+            // Lightbox logic
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const closeBtn = document.getElementById('lightbox-close');
+
+            function openLightbox(src) {
+                lightboxImg.src = src;
+                lightbox.classList.add('active');
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                setTimeout(() => {
+                    lightboxImg.src = '';
+                }, 500); // match transition
+            }
+
+            closeBtn.addEventListener('click', closeLightbox);
+            
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            // Close with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                    closeLightbox();
+                }
+            });
+            
+            // Re-trigger observer for newly injected elements
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            setTimeout(() => {
+                document.querySelectorAll('#gallery-grid .reveal, #gallery-grid .reveal-left, #gallery-grid .reveal-right, #gallery-grid .reveal-zoom').forEach(el => observer.observe(el));
+            }, 100);
+        });
+    </script>
+</body>
+</html>

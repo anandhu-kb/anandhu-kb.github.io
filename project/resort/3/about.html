@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story - RS GREEN VALLEY</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Lora:ital,wght@0,400;0,500;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .about-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 0;
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .about-intro strong {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        /* Large Image Break */
+        .large-image-break {
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            height: 60vh;
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+            margin-top: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .large-image-break img {
+            width: 100%;
+            height: 130%; /* for parallax */
+            object-fit: cover;
+            position: absolute;
+            top: -15%;
+        }
+
+        .large-image-quote {
+            position: absolute;
+            inset: 0;
+            background: rgba(17, 20, 17, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .large-image-quote h3 {
+            color: var(--text-light);
+            font-family: 'Inter', serif;
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            font-style: italic;
+            max-width: 900px;
+        }
+
+        /* Content details grid */
+        .about-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: start;
+            padding: 4rem 0;
+        }
+
+        .about-text-column p {
+            margin-bottom: 2rem;
+            color: var(--text-body);
+            font-size: 1.1rem;
+        }
+
+        .about-text-column p:first-of-type::first-letter {
+            float: left;
+            font-size: 5rem;
+            line-height: 4rem;
+            padding-top: 4px;
+            padding-right: 8px;
+            padding-left: 3px;
+            font-family: 'Inter', serif;
+            color: var(--accent-gold);
+            font-weight: 800;
+        }
+
+        .host-profile {
+            background: var(--bg-color);
+            padding: 3rem;
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+            position: relative;
+        }
+        
+        .host-profile::before {
+            content: '';
+            position: absolute;
+            top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 1px dashed var(--accent-gold);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .host-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .host-profile h4 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .host-profile p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .about-details-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+        }
+    </style>
+</head>
+<body class="header-transparent-text">
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">RS Green<span>Valley</span></a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="photos.html">Gallery</a></li>
+                    <li><a href="about.html" class="active">Our Story</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <img src="img/story.jpg" alt="Header Background" class="page-header-bg">
+        <div class="hero-overlay" style="opacity: 0.85;"></div>
+        <div class="page-header-content reveal">
+            <h1 class="heading-lg">Our Story</h1>
+            <span class="subtitle">A legacy of hospitality in Shenbaganur</span>
+        </div>
+    </section>
+
+    <!-- Introductory Summary -->
+    <section class="container reveal-zoom">
+        <div class="about-intro">
+            Welcome to <strong>RS Green Valley</strong>, an exclusive retreat carefully woven into the pristine environment of Shenbaganur, Kodaikanal. We offer a haven for those seeking to escape the relentless pace of city life and immerse themselves deeply in the restorative tranquility of nature.
+        </div>
+    </section>
+
+    <!-- Full Width Image Break with Quote -->
+    <div class="large-image-break reveal">
+        <img src="img/doorway.jpg" alt="Forest surroundings" class="parallax-img">
+        <div class="large-image-quote">
+            <h3>"Between every two pines is a doorway to a new world."</h3>
+        </div>
+    </div>
+
+    <!-- Detailed Content -->
+    <section class="container">
+        <div class="about-details-grid" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 6rem; align-items: start; padding: 4rem 0;">
+            <div class="about-text-column reveal-left">
+                <span class="subtitle">The Location</span>
+                <h2 class="heading-md mb-4" style="color: var(--primary);">Perfectly Positioned.</h2>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.8;">Conveniently located opposite the Indian Petrol Bunk, our property is extraordinarily accessible while remaining secluded enough to provide a private, peaceful getaway.</p>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.8;">From the misty, cool mornings watching the clouds roll over the deep green valleys to relaxing evenings gathered under a brilliant, unpolluted starlit sky, our goal is to provide an immersive experience that leaves you profoundly refreshed.</p>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.8;">Every stone, every pathway, and every room has been designed to reflect the natural beauty of Kodaikanal, ensuring that whether you are indoors or out, you never feel disconnected from the environment.</p>
+            </div>
+            
+            <div class="reveal-right">
+                <div class="host-profile" style="background: var(--bg-card); padding: 3rem; border-radius: 2px; box-shadow: var(--shadow-sm); text-align: center; border: 1px solid var(--glass-border);">
+                    <div class="host-icon" style="font-size: 3rem; margin-bottom: 1rem; color: var(--accent);">🌿</div>
+                    <h4 style="color: var(--primary); font-size: 1.5rem; font-weight: 500;">Sundaralingam</h4>
+                    <span class="subtitle" style="display:block; margin-bottom: 1.5rem; color: var(--text-body);">Resort Management</span>
+                    <p style="margin-bottom: 2rem; font-style: italic;">"At RS Green Valley, we believe that true luxury is not just in the thread count of the sheets, but in the warmth of the hospitality, the purity of the air, and the peace of mind. My team and I are dedicated to making your stay unforgettable."</p>
+                    
+                    <a href="contact.html" class="btn btn-outline" style="width: 100%;">Connect With Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dark Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col" style="grid-column: span 1 / auto;">
+                    <a href="index.html" class="logo" style="margin-bottom: 2rem;">RS Green<br><span style="color:var(--accent-gold);">Valley</span></a>
+                    <p class="footer-desc">Redefining serenity in the heart of Shenbaganur. Experience Kodaikanal's premium nature retreat where luxury meets the wild.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Explore</h3>
+                    <a href="index.html">Home</a>
+                    <a href="photos.html">The Gallery</a>
+                    <a href="about.html">Our Story</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <p>📍 Shenbaganur,<br>Opp Indian Petrol Bunk,<br>Kodaikanal</p>
+                    <p style="margin-top: 1rem; color: var(--accent-gold);">📞 +91 8124659689</p>
+                    <p style="color: #666; font-size: 0.9rem;">Management: Sundaralingam</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> RS Green Valley. All Rights Reserved. Designed for Luxury.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

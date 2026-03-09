@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RS GREEN VALLEY | Kodaikanal</title>
+    <!-- Modern Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Home Feature Section Styles */
+        .features {
+            background-color: var(--secondary);
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: var(--bg-color);
+            padding: 3rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .intro-image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .intro-image-wrapper img {
+            transition: var(--transition);
+        }
+
+        .intro-image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 900px) {
+            .intro-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">RS Green<span>Valley</span></a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="photos.html">Photos</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="img/1.jpeg" alt="Resort View" class="hero-img">
+        <div class="hero-content">
+            <h1>Escape to Nature</h1>
+            <p>Experience tranquility in the heart of Kodaikanal at Shenbaganur</p>
+            <div class="hero-buttons">
+                <a href="photos.html" class="btn btn-primary">View Gallery</a>
+                <a href="contact.html" class="btn btn-accent">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="section container intro-section reveal">
+        <div class="intro-content">
+            <h2 class="mb-2" style="font-size: 2.5rem; color: var(--primary);">Welcome to Your Retreat</h2>
+            <p class="mb-4" style="font-size: 1.1rem; color: #555;">Located directly opposite to the Indian Petrol Bunk in serene Shenbaganur, our resort offers the perfect blend of natural beauty and modern comfort. Unwind amidst the misty hills and lush greenery of Kodaikanal.</p>
+            <a href="about.html" class="btn btn-primary">Discover Our Story</a>
+        </div>
+        <div class="intro-image-wrapper">
+            <img src="img/3.jpeg" alt="Resort Room">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>RS Green Valley</h3>
+                    <p>Your premium gateway to the serene views of Kodaikanal.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <a href="index.html">Home</a>
+                    <a href="photos.html">Photos</a>
+                    <a href="about.html">About Us</a>
+                    <a href="contact.html">Contact Us</a>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <p>📍 Shenbaganur, Opp Indian Petrol Bunk, Kodaikanal</p>
+                    <p>📞 +91 8124659689</p>
+                    <p>👤 Sundaralingam</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> RS Green Valley. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
